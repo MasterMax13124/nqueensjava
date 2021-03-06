@@ -88,6 +88,24 @@ public class chessboard{
                 r++;
                 board[c][r] = "X";
             }
+
+            c = i;
+            r = queenPositions[i];
+
+            while(c > 0 && r < this.size -1) {
+                c--;
+                r++;
+                board[c][r] = "X";
+            }
+
+            c = i;
+            r = queenPositions[i];
+
+            while(c < this.size -1 && r > 0) {
+                c++;
+                r--;
+                board[c][r] = "X";
+            }
         }
     }
 
