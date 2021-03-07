@@ -1,3 +1,4 @@
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -6,33 +7,28 @@ import java.util.Random;
 
 public class nqueensolver {
     public static void main(String[] args) {
-        final chessboard board = new chessboard(8);
-        // board.fillBoardDefault();
-        putQueen(board, 0);
-
-        // board.setQueen(0, 0);
-        // board.checkQueens();
-        // modifyBoard(board);
-        //System.out.println("Final board:\n" + board.getBoardText());
-
-        // int x = 0;
-        // System.out.println(x);
-
+        System.out.println("Please input the chessboard size limit: ");
+        int inputvalue = Integer.parseInt( System.console().readLine() );
+        for(int i = 4; i <= inputvalue; i++) {
+            chessboard board = new chessboard(i);
+            board = putQueen(board);
+        }
     }
 
-    public static void modifyBoard(final chessboard inpb) {
-        chessboard xyz = new chessboard(inpb.getBoard(), 4);
-        // chessboard bbb = new chessboard(inpb);
+    public static chessboard putQueen(chessboard inputBoard) {
+        putQueen(inputBoard, 0);
 
-        xyz.setQueen(2, 2);
-        // xyz.setQueen(2, 2);
+        return inputBoard;
     }
 
-    public static boolean putQueen(chessboard inputBoard, int columnIndex) { //c specifies the target column for the queen
+    public static boolean putQueen(chessboard inputBoard, int columnIndex) {
         chessboard board = new chessboard(inputBoard.getBoard(), inputBoard.getSize());
 
         if (columnIndex >= board.getSize()) { //Stop the recursion when the last column is reached
-            // inputBoard = board;
+            String result = board.getBoardText();
+            System.out.println(result);
+            System.out.println("Final amount of queens: " + (result.length() - result.replace("Q", "").length()));
+            System.out.println("Chessboard size: " + board.getSize() + " * " + board.getSize() + "\n\n");
             return true;
         }
 
@@ -58,19 +54,16 @@ public class nqueensolver {
 
             board.setQueen(columnIndex, i);
             board.checkQueens();
-            System.out.println(board.getBoardText());
-            //System.out.println(board.getSize());
+
+            // System.out.println(board.getBoardText());
+
             if(putQueen(board, columnIndex +1)){
                 break;
             }
-
             board = new chessboard(inputBoard.getBoard(), inputBoard.getSize());
         } while (true);
 
-        // System.out.println(board.getBoardText());
-
-        // putQueen(board, columnIndex + 1);
-        inputBoard = board;
+        // inputBoard = board;
 
         return true;
     }
