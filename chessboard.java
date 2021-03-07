@@ -11,11 +11,19 @@ public class chessboard{
     public chessboard(){
         this.size = 8;       
         this.board = new String[size][size]; 
+        fillBoardDefault();
     }
 
     public chessboard(int size) {
        this.size = size;
        this.board = new String[size][size]; 
+       fillBoardDefault();
+    }
+
+    public chessboard(String[][] board, int size) {
+        this.board = board;
+        this.size = size;
+        // fillBoardDefault();
     }
 
     /**
@@ -127,7 +135,17 @@ public class chessboard{
     *Returns just the fields of the board, in the way they are internally stored.
     */
     public String[][] getBoard() {
-        return this.board;
+        String[][] getterboard = new String[this.size][this.size];
+
+        for (int i = 0; i < size; i++){
+            for (int j = 0; j < size; j++){
+                getterboard[i][j] = this.board[i][j];
+
+            }
+        }
+
+        return getterboard;
+        // return this.board;
     }
 
     /**
